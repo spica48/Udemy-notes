@@ -1,7 +1,7 @@
 git hub commands
 
 Note:
-* key (/c/Users/heather/.ssh/id_rsa)  
+
 * git is case sensitive on filenames
 * npp stands for notepad++ that was configured to open when npp is entered
 * stay out of the .git folder
@@ -114,7 +114,7 @@ SSH - github connection to use on our own computer. Adds a key to computer and g
 1-"ls .ssh" to see if a key is set up already
 2 -"mkdir .ssh"  create ssh key on home system
 3- "cd .ssh/" //go to the directory
-4- "ssh-keygen -t rsa -C "emailaddress@domain.com"  //generates a keyfile and prompted where to save it   ssh-keygen -t rsa -C "spica48@outlook.com"
+4- "ssh-keygen -t rsa -C "emailaddress@domain.com"  //generates a keyfile and prompted where to save it   ssh-keygen -t rsa -C "emailaddress@domain.com"
 5- in the terminal, navigate to the location where it was saved, do ls -al to confirm rsa.pub file exists, open it with editor then copy entire contents.
 6- go to github account online in the profile settings, add new SSH key. Give name, paste entire contents and save.
 
