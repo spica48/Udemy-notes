@@ -1,0 +1,225 @@
+Maven installation
+
+Download maven here:  https://maven.apache.org/download.cgi
+For windows select the .zip file Ex: apache-maven-3.5.3-bin.zip
+Unzip and put the maven folder in c:/program files
+Copy the complete path to maven folder
+Set environment variables for maven
+ 1) Create system variable: name M2_HOME  value C:\Program Files\apache-maven-3.5.3 (path to the top level maven folder)
+ 2) Concatenate the path variable to add the bin folder on the end   ....;C:\Program Files\apache-maven-3.5.3\bin
+ Save and close
+ 
+To verify installation, open command prompt, go to c: and submit mvn -version
+ 
+========================================================================
+ To make a maven project with archetype
+Make a folder where the project will be Example: c:/apps
+
+Open command prompt and go to c:\apps
+Submit mvn archetype:generate   (this generates a project)
+Respond to these:
+1-Choose a number or apply filter...  submit the same number provided Ex: 515
+2- Choose a number: 27:  submit the same number provided Ex: 27
+3- Define value for property group id:  [package name] Ex: Framework
+4- Define value for property artifact id:  [more specific name] Ex: Training  // this creates a folder with the pom.xml inside the folder where you are making the archetype
+5- Define value for property version: just press enter
+6- Define value for property package: just press enter
+7- Confirm properties configuration: Enter Y if all the above info was entered correctly
+========================================================================
+To connect Maven to Eclipse
+1-Navigate to where the folder that was made for the artifact id (step 4), where the pom.xml was generated. Ex: C:/Apps/Training
+2-Go to command prompt and submit mvn eclipse:eclipse  --> makes the project in eclipse
+3-Open eclipse
+4-File-immport-maven-existing maven projects-next-browse to folder where pom file is saved-click OK- pom file should appear in the wizard-finish-project should appear in the explorer
+5-Two folders inside 1) src/test/java   2) src/main/java
+6-pom.xml should be inside at the root level. click on it then pom.xml tab to see all the dependencies
+========================================================================
+To add TestNG dependency
+1-Search google for Maven testng dependency or go to http://testng.org/doc/maven.html
+2-Locate:
+<dependency>
+  <groupId>org.testng</groupId>
+  <artifactId>testng</artifactId>
+  <version>6.8</version>
+  <scope>test</scope>
+</dependency>
+3- copy the whole thing and paste it inside the pom between <dependencies></dependencies>
+4- In the src/test/java folder, make a new class with the @Test notation -> it will underline in red
+Example:
+package TutorialFramework;
+
+@Test
+public class Test1 {
+
+}
+5-Hover over @Test (with red warning) then click Import TestNG library ->TestNG library folder appears in the package
+6- Add the import for @Test annotation 
+The whole class should look like this now:
+package TutorialFramework;
+import org.testng.annotations.Test;
+
+@Test
+public class Test1 {
+
+}
+
+7-Run the code as TestNG test -should pass (R click on the class - run as -testNG test)
+
+========================================================================
+To add Selenium dependency
+1-Google search for maven repository ->  mvnrepository.com
+2-On mvnrepository.com search for Selenium -> list of versions appears
+3-click on the one you want, usually most recent, and dependency appears
+4-copy the whole thing and paste it inside the pom between <dependencies></dependencies>
+5-save
+
+========================================================================
+To compile and get all the dependencies
+1- Command prompt
+2-Go to folder where the pom is saved
+3-mvn compile - submit this in command prompt, it checks syntax
+4-mvn test - submit this in command prompt --> project should build and jars will be added in .m2 folder
+5-jars will be downloaded to .m2\repository folder. TestNG and Selenium are in the org folder Ex:C:\Users\heather\.m2\repository\org
+
+* Sometimes the functions at command line fail. Just try again by submitting the same command again.
+
+========================================================================
+Compile
+mvn compile- Checks for Syntax errors in the code
+
+========================================================================
+mvn test- Downloads all the Jars which are referenced in the pom.xml
+
+========================================================================
+To incorporate TestNG xml into maven
+put the TestNG xml file at the root. It will appear next to the pom.xml file
+In the pom, in plugins-surefire plugin - inside <suiteXmlFiles></suiteXmlFiles>, add all the testNG.xml files that are part of the project.
+Example
+It will run whatever tests are referenced from src/test/java
+
+<dependency>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.21.0</version>
+</dependency>
+
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.21.0</version>
+	<configuration>
+	<suiteXmlFiles>
+	<suiteXmlFile>testng.xml</suiteXmlFile>
+	<suiteXmlFile>testng2.xml</suiteXmlFile>
+	</suiteXmlFiles>
+	</configuration>
+	</plugin>
+	
+</dependency>
+
+
+========================================================================
+Final pom.xml  --> successfully ran TestNG test and opened Chrome driver but had to download chrome driver and reference it in the test class. Pom chrome driver didnt work.
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>TutorialFramework</groupId>
+	<artifactId>Training</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<name>Training</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
+			<version>3.11.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
+			<plugins>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.7.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.21.0</version>
+					<configuration>
+						<suiteXmlFiles>
+							<suiteXmlFile>testng.xml</suiteXmlFile>
+						</suiteXmlFiles>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
+
+
+
+
+
+
+
+
+
+
+Profiles
+mvn test-PSmokeTesting
+mvn test -PRegressionTesting

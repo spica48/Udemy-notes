@@ -1,0 +1,40 @@
+Rest tutorial
+http://localhost:8080/student/list
+
+"netstat -an" to find open ports, go to command prompt at c:
+"java -jar studentApp.jar --server.port=8085"    to start the jar on specific port, 8085 in this case.
+
+http://jsonviewer.stack.hu/
+
+{{url}}/student/list?programme=Computer Science&limit=2
+
+
+GET - get a response
+POST - Add a record
+PUT - Updating information
+PATCH - edit selective information
+OPTIONS- see what methods are allowed
+HEAD -
+
+
+Response codes
+200 OK
+201 Created
+204 No content (Successful but no response included)
+400 Bad request
+404 page not found
+405 Method not allowed
+
+
+
+The PATCH method requests that a set of changes described in the request entity be applied to the resource identified by the Request- URI. The set of changes is represented in a format
+called a "patch document" identified by a media type. If the Request-URI does not point to an existing resource, the server MAY create a new resource, depending on the patch document 
+type (whether it can logically modify a null resource) and permissions, etc.
+
+The difference between the PUT and PATCH requests is reflected in the way the server processes the enclosed entity to modify the resource identified by the Request-URI. In a PUT request,
+the enclosed entity is considered to be a modified version of the resource stored on the origin server, and the client is requesting that the stored version be replaced. With PATCH,
+however, the enclosed entity contains a set of instructions describing how a resource currently residing on the origin server should be modified to produce a new version.
+The PATCH method affects the resource identified by the Request-URI, and it also MAY have side effects on other resources; i.e., new resources may be created, or existing ones modified,
+by the application of a PATCH.
+
+To find out which methods are allowed on a particular resource (URL), submit the URL in type OPTIONS

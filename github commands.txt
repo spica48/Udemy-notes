@@ -1,0 +1,224 @@
+git hub commands
+
+Note:
+* key (/c/Users/heather/.ssh/id_rsa)  
+* git is case sensitive on filenames
+* npp stands for notepad++ that was configured to open when npp is entered
+* stay out of the .git folder
+* cd ..  goes up a folder  (cd + space + ..)
+* general flow - create git project, create files, add to staging area, commit with comments
+
+fire up terminal - open git bash from start menu
+"git init projectName" of project you want to create (folder name)  Ex: git init demo makes a project called demo
+"ls" - lists everything in the current dir, all the files and folders including hidden ones
+"ls -al"  all the files including hidden ones. (in the current repository? Seems it is all the files in the working directory including hidden and not added to repo.)
+"git status"   - enter this any time you want to know what's going on in the local repository
+"npp filename.ext"   - opens notepad in that file name. If there is no file by that name it makes a new one, otherwise opens existing.
+click x to close the file - click save on the confirmation pop up
+submit "git status" to see the files waiting to be committed
+"git add FILENAME.ext"  then enter --> adds from working dir to staging area
+"git add ." // adds all files in the current folder to the staging area
+"git commit -m "Any message you want to add in the commit" " // commits whatever has been added to staging area along with message. The message has to be in quotes
+"git commit" opens the associated text editor as the default commit message system where commit comments can be added. Add you message on the very top line of the editor, save & close.  
+"clear"  clears the command window
+"rm -fr .git" // completely removes the .git folder from the project you are in
+"git ls-files"  This lists all of the files in the repository, including those that are only staged but not yet committed. 
+"git init ." // dot means the current folder
+"ls -al" to see if there is git folder in a project already (shows all the files in the current dir)
+"git log" all the commit messages that are part of this repository
+"git show" /// last commit and a diff
+"q" // get out of 'git show' and 'git log' results
+"npp filename.ext" //entering that in the directory where that file exists will open it for editing. npp stands for notepad++ that was configured as default editor.
+Modify a file, save, close, do "git status" and see the name of the file that was modified
+"git ls-files" the files git is tracking? This lists all of the files in the repository, including those that are only staged but not yet committed.?
+"touch filename.ext" - adds a new untracked file
+"rm filename.ext"  removes a file
+"git commit -a"  // express commit, add modified files to staging area then proceed to commit for all tracked files including modified files
+"git commit -am" // same as above but the m allows adding a commit message
+"git reset HEAD FILENAME.ext" // to unstage whatever is in "added" mode.  Git will respond to list what is unstaged. The changes are still in the file in the working directory, just unstaged.
+"git checkout -- README.md" // make sure a space between -- and the filename. this command removes the CHANGES from the file in the working directory and reverts back to last known good version from repository.
+"git help log"  lots of options
+"git log --oneline --graph --decorate --all" // preferred log history command
+"git config --global alias.hist "log --oneline --graph --decorate --all" // makes alias for history (already done on my pc)
+"git config --global --list" // already setup on my pc, shows list of git configurations, default text editor, merge tool, aliases etc. 
+"git hist" // calls the alias I made
+"git mv OriginalFILENAME.ext NewFILENAME.txt" // changes the name of the file Example: git mv example.txt demo.txt   (edits the file name to demo.txt)
+"git rm FILENAME.ext" // deletes file from STAGE and keeps history. To delete from repo you must COMMIT after. This is better than just deleting it using the operating system because there is history.
+
+To delete a file from repo, delete it from working area then commit that.
+1- "git rm FILENAME.ext"
+2- git status shows it was deleted but this is in stage
+3- git commit -m "deleting file"
+
+"git add -u" //updates git
+"git add -A" //covers all modifications on the working directory
+
+"npp .gitignore"//the first time you run it makes a new file for list of exclusions. Next time it will open the existing file.  Inside the file put one pattern or expression per line. Example *.log  
+                  this file needs to be added to the repository. Commit it anytime changes are made.
+
+Comparing changes
+- show history "git hist"
+"git diff HISTORYCODENUMBER HEAD"  Example: git diff 1616e9d HEAD    The difference between the last commit on the current branch & that specific commit (the number)
+"git difftool HISTORYCODENUMBER HEAD"
+"git diff" shows changes in the command window when a file has been modified but hasn't been committed yet.
+"git difftool" shows changes in the default compare tool between modified file that hasn't been commited and the last repo version of that file.
+"git help diff" Opens HTML list in browser (offline) showing list of diff commands (diff help)
+
+Merges
+
+Pointers
+HEAD point of last commit (can be moved)
+
+"git branch" shows the branch you are on
+the one with * denotes the current branch
+
+"git checkout -b nameOfBranchYouWantToSwitchTo"   example:  git checkout -b updates //makes new branch if not one by that name & switches to it. Carries changes over from working dir.
+"git diff namebranch1 namebranch2"  Example run git hist to see the name of branches then git diff updates master
+"git checkout branchName" to switch branches Example git checkout master. To confirm enter "git hist" and ensure Head is on that desired branch name
+"git merge nameOfBranchYouWantToMergeToCurrentBranch"  Example: go into master branch then submit git merge updates
+"git branch -d nameOfBranchToDelete"  Example git branch -d updates
+"git branch -a" shows all branches with the current one in green with *
+"cat FILENAME.ext" outputs entire contents of file
+"git mergetool"  submit while in merge conflict mode.
+While in merge mode (master|MERGING) when ready to commit the merge type git commit -m "Resolving conflict or whatever msg"
+
+Tags - labels you can add at any commit point
+"git tag tagname" git creates a tag for you Ex:  git tag mytag
+"git tag --list" lists all the tags you have
+"git tag -a v1.0 -m "Release 1.0"  // makes annotated tag
+"git show tagname"  or "git show versionNumber" // shows all the info associated with the tag -name, commit comment, date, etc  Ex:  "git show 1.0"
+
+You can see any commit by the number associated in hist. Tag is just an easier way to give a label to a particular commit.
+
+Stashing
+"git stash"  when you have a modified file that is not added or committed. saves it as WIP on the branch
+"git stash list" shows all the stash entries
+"git stash pop" 1)applies the modification/stash then drops the stash
+
+Resetting
+"git reset commitNumber --soft" // least destructive, moves the head
+"git reset commitNumber --hard" // most destructive, wipes out staging area and any changes that were pending
+"git log" shows all the ids
+"git reflog" shows all the different actions
+
+
+GitHub
+"git remote add origin https://github.com/spica48/demo.git"  To push existing repository to gitub via command line
+"git remote add [name of remote reference we want to create (origin)] [full URL to the remote repository]
+"git push -u origin master --tags" // sets up tracking branch relationship 
+"git push origin master" // to do future commits
+origin = the location on gitgub
+
+
+SSH - github connection to use on our own computer. Adds a key to computer and github so they connect.
+1-"ls .ssh" to see if a key is set up already
+2 -"mkdir .ssh"  create ssh key on home system
+3- "cd .ssh/" //go to the directory
+4- "ssh-keygen -t rsa -C "emailaddress@domain.com"  //generates a keyfile and prompted where to save it   ssh-keygen -t rsa -C "spica48@outlook.com"
+5- in the terminal, navigate to the location where it was saved, do ls -al to confirm rsa.pub file exists, open it with editor then copy entire contents.
+6- go to github account online in the profile settings, add new SSH key. Give name, paste entire contents and save.
+
+To test out SSH connections in the terminal
+"ssh -T git@github.com"  --> will ask for passphrase, type yes & enter, github should respond affirmatively
+
+===================================================================================================================
+
+Create new respository directly on github.com
+Go to github.com click on octocat to be on the right page
+Click new repository
+Enter name for the repository
+Add description
+Select public or private
+Check initialize with a README (optional)
+Make selections in .gitignore and add license drop downs
+Click create repository -> Github creates the master branch with the initial set of files
+
+===================================================================================================================
+Create a local copy / Cloning a repository on Github
+
+On the repository page, Click Clone button
+If ssh is set up on your pc, select that. If not, leave on https
+Click clipboard icon, this will copy the project
+Go to git bash command prompt into the directory where the project should be added
+"git clone Paste_URL_copied_from_GitHub"  - the URL depends if you copied as https or ssh
+User will be prompted for passphrase - submit this *** the pass phrase will not show as the user types, looks like typing not working
+A folder will be created by the project name and all the files imported there
+submit "ls -al" to see all the files imported
+"git remote -v" shows the origin on github vs your pc  fetch/push
+"git clone GitProjectURL folderNameOfYourChoice" - Ex; git clone git@github.com:jasontaylor/my-website.git website -> clones and names the folder what you added at the end of the line
+
+===================================================================================================================
+To get started making a website
+Go to www.initializr.com
+Select the type (bootstrap for example)
+Then select the files
+Click download it
+Click on the download and get where all the files are unzipped
+Use the Git copy command to copy them to the desired location on your pc (Ex: projects/website)  C:/Users/heather/Downloads/initializr-verekia-4.0/* .
+From the directory where you want the files copied to,  "cp -R C:/Users/heather/Downloads/initializr-verekia-4.0/* ."  Use fwd slashes and don't forget /* . 
+* means copy all the files, dot means destination=current directory. 
+C:/Users/heather/Downloads/initializr-verekia-4.0/* .
+git status to see all the files untracked
+git add .
+git commit -m "adding xyz files" --> git adds the files to the local repo
+
+===================================================================================================================
+To push the files to github
+Be in the directory of the repo with everythig already updated with git commit -m
+"git push nameOfRemoteToUse branchToPushUp"  Ex: git push origin master  use "git remote -v" to get the info if necessary
+Go to the project on github.com and verify the files were uploaded
+===================================================================================================================
+"git version" -> shows version
+===================================================================================================================
+"git push" shortcut to push to linked repo on github.com
+===================================================================================================================
+"git config --global push.default simple"  should be included by default after git 2.0., only push the current branch
+===================================================================================================================
+Fetching
+When working with a repository linked on github.com, you need to fetch first before you can commit anything new from local changes.
+Example: change one of the files on github.com, then go to local repo and try to push -> github gives a warning that fetch must be done first so the files are in sync.
+
+"git fetch" gets the branch from github, brings it local and makes it a new branch of it's own to be reviewed. Example: new branch named origin/master
+git fetch is a non destructive way to analyze
+"git pull" is a merge commit and updates the local branch
+"git push" updates local to github.com
+
+Change somethign directly on github, you need to do "git fetch" on the local then "git pull" merges github.com changes into local, then "git push" to add any local changes to github
+Doing a pull or a fetch prior to any pushes is a best practice and essential if sharing the repo.
+
+===================================================================================================================
+Changing name of repo on github
+Go into the settings and change the name
+Any clones need to be updated because they point to the old name (git remote -v shows this)
+From the updated project on github (where name was changed) get the clone URL
+Go back to gitbash
+"git remote set-url origin cloneURLfromGitHub"  -> resets the link on local to repo on github using the new repo name
+"git remote show origin" shows fetch push configurations
+
+
+===================================================================================================================
+Create new file on Github, on a branch, the pull it into the master on github
+In gitub at the root level or inside whichever folder you choose, click create new file
+Name the file, paste in the info, give it a name,scroll to bottom and add commit message, click create new branch, name the branch,then propose new branch
+Go back to project level and complete a pull request then delete the branch.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
