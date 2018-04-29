@@ -1,21 +1,140 @@
-Rest tutorial
-http://localhost:8080/student/list
-
+Rest tutorial Udemy course notes
+http://localhost:8085/student/list   - after running the jar go here to see the data
+=======================================================================================
 "netstat -an" to find open ports, go to command prompt at c:
+=======================================================================================
+in command line navigate to where the studentApp jar is saved  c/users/heather/documents/udemy
+the submit this at command line:
 "java -jar studentApp.jar --server.port=8085"    to start the jar on specific port, 8085 in this case.
 
-http://jsonviewer.stack.hu/
+=======================================================================================
+Viewing info in browser developer tools
+Open Chrome
+Open developer tools
+Select the network tab
+Load the page you want to view, in this case http://localhost:8085/student/list
+See the page in the list on the network tab
+Click on it to view Headers, GET method, response
+=======================================================================================
+
+
 
 {{url}}/student/list?programme=Computer Science&limit=2
 
+=======================================================================================
+Saving requests
+Submit the request with all the required details -> successful response
+Click on the history tab and find the request at the top
+Hover over it then click on the three dots at the right end
+Click Save request
 
+
+=======================================================================================
+Export a collection to share with team
+Hover over the collection folder to show three dots menu
+Click dots
+Click export
+Give name then export --> explorer window opens to pick location - add/confirm location then click Save
+
+=======================================================================================
+Import a Collection
+Click the Import button at top left of the screen
+Follow prompts to browse to and import the collection
+
+=======================================================================================
+To create environment
+Click gear icon - manage environments -click Add (environment) - Give name (Ex: local host environment)- Key(variable name) = url value = http://domain:port  (value=https://localhost:8085)
+Go to request panel, wherever the variable will be used type {{variableName}} instead and the key value will be inserted. Ex: {{url}}/student/list
+Change the environment by selecting in the environment drop down. The variables associated with that environment can be used.
+
+=======================================================================================
+Manage or add environment - click gears at top right
+=======================================================================================
+Using queries
+1-You need to know the jason label and value for what you are searching for
+2-At the end of a GET request, add ?key=value   Ex: https://localhost:8085/student/list?programme=Computer Science
+3- Submit the request with the query and teh results will match that filter	
+
+Additional parameters are separated by &
+
+To limit results to the first two results
+?limit=2
+or ?programme=computer science&limit=2
+
+=======================================================================================
+Getting info on the results/response
+Click the magnifying glass icon at top right of the body area
+Enter the search term you want info on, example search for "computer science" it will show how many results are on the page
+=======================================================================================
+json beautifier
+http://jsonviewer.stack.hu/    paste json in there and view it. nodes will be numbered starting at zero.
+=======================================================================================
+To force an error
+Some applications provide errors
+They can be triggered with things like ?limit=-2, which may return a response like error limit should be >=0  400 bad request
+=======================================================================================
+To bulk save from history
+Go to history tab - ctrl + click each request to be saved (usually by same request type) then click save to collection, pick collection and folder then save.
+The requests will be organized in the request folder.
+=======================================================================================
+Adding query params using the button/feature instead of adding to end of URL
+Click Params button at the end of the address bar -> modal opens to fill out key and value
+If the param is already on the URL it will be prepopulated in the params modal
+Can edit with bulk edit
+Can drag up and down in order
+can check / uncheck for activation
+=======================================================================================
+POST requests
+1- you need to know the URL where the post must be done  Example  /student  not student/list
+2- Need to know the list of keys that must be provided with values
+3- Need to know which keys/fields do not need to be provided because the database will supply them, such as the id#
+4- Need to know any keys that need unique values otherwise the request will fail if there are duplicate values where not allowed. This can also be used to check error messages - submit duplicate and validate error message.
+4- Select POST
+5- Enter teh URL
+6- Select environment if necessary
+7- in the body area select body and raw and make a selection in the drop down for data type (json)
+8- Type the necessary JSON containing info to post
+
+=======================================================================================
+To update with PUT
+To update info of a particular student /student/id#
+1-Need URL where the update needs to be made
+2-Need full details of the item that needs to be updated  with PUT you resubmit the entire record with changes in it
+3-Select PUT for request type, add the url, paste the json info in the body, select type json and submit
+4-verify by doing a get request on the full student list or whatever appropriate to the individual application
+=======================================================================================
+To update with PATCH
+1-Know the URL where update will be made
+2-In the body, only put the key and value then submit
+3- Do a GET to see the info was updated inside existing record
+=======================================================================================
+To DELETE
+1-Need to know the URL where the record is and can be deleted  /student/id#
+2-Select DELETE for the type of request, add the URL of that individual record, click send
+3- Note - no body is required in the request
+4-When successfully deleted the response code will be 204 no response
+=======================================================================================
+OPTIONS
+Select this request type, add the URL then submit
+Check the HEADERS tab to see what methods are allowed here
+=======================================================================================
+
+=======================================================================================
+
+=======================================================================================
+
+=======================================================================================
+
+=======================================================================================
+
+=======================================================================================
 GET - get a response
 POST - Add a record
 PUT - Updating information
 PATCH - edit selective information
 OPTIONS- see what methods are allowed
 HEAD -
-
+=======================================================================================
 
 Response codes
 200 OK
@@ -24,6 +143,20 @@ Response codes
 400 Bad request
 404 page not found
 405 Method not allowed
+=======================================================================================
+Postman sections
+authorization-It supports multiple authorization on the authorization tab
+parameters - enter on the right of the the URL field
+Headers -
+
+=======================================================================================
+How to organize and store information in postman
+Collections
+Click on collection then new icon - modal opens
+Add name and description, click save.- 
+Add folders to the collection - hover over it to show three dots menu - click dots - select new folder -follow prompts to make new folder
+After saving the folder, click the collection you made to make the folders appear under it. The folders do not show by default after you make them.
+Create folders for each type of request (1)get, 2 post, etc
 
 
 
@@ -38,3 +171,26 @@ The PATCH method affects the resource identified by the Request-URI, and it also
 by the application of a PATCH.
 
 To find out which methods are allowed on a particular resource (URL), submit the URL in type OPTIONS
+
+
+rest-assured.io
+https://github.com/rest-assured/rest-assured/wiki/Usage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
