@@ -1,0 +1,11 @@
+Val links
+http://www.testautomationguru.com/selenium-webdriver-how-to-execute-tests-in-multiple-environments/
+https://stackoverflow.com/questions/29104506/how-to-find-svn-version
+https://www.clear.rice.edu/comp310/Eclipse/
+https://www.clear.rice.edu/comp310/Eclipse/moving_folders.html
+https://stackoverflow.com/questions/5156093/eclipse-workspace-how-to-rename-workspace
+https://www.clear.rice.edu/comp310/Eclipse/
+http://www.testautomationguru.com/selenium-webdriver-how-to-execute-tests-in-multiple-environments/  - working with properties files
+https://stackoverflow.com/questions/9661540/alternative-to-maven-scm-connector-subclipse-not-working-with-subclipse1-8
+https://www.clear.rice.edu/comp310/Eclipse/installation.html 
+https://fruzenshtein-school.usefedora.com/

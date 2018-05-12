@@ -12,6 +12,19 @@ Set environment variables for maven
 To verify installation, open command prompt, go to c: and submit mvn -version
  
 ========================================================================
+========================================================================
+QuickStart
+-open cmd
+-go to folder where the project should be created
+-submit the quickstart line below (modified for each new project) Words in caps below need to be modified each time.
+
+mvn archetype:generate -DgroupId=com.COMPANYNAME.SUBFOLDERNAMEOFYOURCHOICE -DartifactId=TOPLEVELPROJECTNAME -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+Example:
+mvn archetype:generate -DgroupId=com.motionpoint.automation -DartifactId=automation_cre -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+ 
+========================================================================
+
  To make a maven project with archetype
 Make a folder where the project will be Example: c:/apps
 
